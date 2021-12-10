@@ -7,14 +7,15 @@ This is the result of Suitmedia Screening Test using on Android platform Kotlin.
 - Retrofit
 - Moshi
 - Kotlin Coroutine
+- Glide
 
 ## Home Page
-On home page, I'm using ```TextInputLayout``` for the text field and simple button for next button. Text field can't be empty and the code check it when next button clicked.
+On home page, I'm using ```TextInputLayout``` for the text field and simple button for next button. Text field can't be empty and the code check it when next button clicked. I use Navigation Safe Args to send the input to the Choose Button Page
 
 ![Home Page](https://i.ibb.co/ZK44pXg/Home-Page-Test-One.png) ![Home Page on Error](https://i.ibb.co/f45b5W9/Home-Page-on-Error-Test-One.png)
 
 ## Choose Button Page
-On choose button page, I'm using data binding and shared viewmodel to attach the selected guest and event. If selected guest is null then button guest's name is "Pilih Guest". And so the button event does.
+On choose button page, I'm using data binding and shared viewmodel to attach the selected guest and event. If selected guest is null then button guest's name is "Pilih Guest". And so the button event does. For the args, this page received data from Home Page as String and attached it to the ```TextView```.
 
 ![Choose Button Page](https://i.ibb.co/zJKHK0B/Choose-Button.png)
 
