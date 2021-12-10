@@ -1,6 +1,7 @@
 package com.andiez.suitmediatestone.ui.guest
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.andiez.suitmediatestone.databinding.FragmentGuestsBinding
 import com.andiez.suitmediatestone.model.local.GuestEntity
 import com.andiez.suitmediatestone.ui.SharedMainViewModel
+import com.andiez.suitmediatestone.utils.isPrime
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,28 +40,35 @@ class GuestsFragment : Fragment() {
                 val calendar = Calendar.getInstance()
                 calendar.time = date!!
                 val day = calendar.get(Calendar.DAY_OF_MONTH)
-                when {
+                val month = calendar.get(Calendar.MONTH) + 1
+                var text = ""
+                text += when {
                     (day % 2 == 0 && day % 3 == 0) ->
-                        Toast.makeText(requireContext(), "iOS", Toast.LENGTH_SHORT).show()
+                        "iOS"
                     (day % 2 == 0) ->
-                        Toast.makeText(requireContext(), "blackberry", Toast.LENGTH_SHORT).show()
+                        "blackberry"
                     (day % 3 == 0) ->
-                        Toast.makeText(requireContext(), "android", Toast.LENGTH_SHORT).show()
-                    else -> Toast.makeText(requireContext(), "feature phone", Toast.LENGTH_SHORT)
-                        .show()
+                        "android"
+                    else -> "feature phone"
                 }
+                text += ", ${if (isPrime(month)) "isPrime" else "not Prime"}"
+                Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT)
+                    .show()
                 viewModel.setSelectedGuest(item)
                 this@GuestsFragment.findNavController().popBackStack()
             }
 
         })
-        viewModel.getGuests().observe(viewLifecycleOwner) { guestList ->
+        viewModel.getGuests().observe(viewLifecycleOwner)
+        { guestList ->
             if (guestList != null) {
                 adapter.setListNotes(guestList)
-                binding.tvEmpty.visibility = if (guestList.isEmpty()) View.VISIBLE else View.GONE
+                binding.tvEmpty.visibility =
+                    if (guestList.isEmpty()) View.VISIBLE else View.GONE
             }
         }
-        with(binding) {
+        with(binding)
+        {
             viewModel = this@GuestsFragment.viewModel
             toolbar.setupWithNavController(navHostFragment, appBarConfiguration)
             rvGuest.setHasFixedSize(true)

@@ -25,7 +25,7 @@ fun convertFormatDate(oldDate: String): String {
 }
 
 fun isPalindrome(words: String): Boolean {
-    return words.replace(" ", "") == words.replace(" ", "").reversed()
+    return words.replace(" ", "").lowercase() == words.replace(" ", "").reversed().lowercase()
 
 //    Manual algorithm
 //    val listChar = ArrayList<Char>()
@@ -45,4 +45,15 @@ fun isPalindrome(words: String): Boolean {
 //        secondChars.add(listChar[i])
 //    }
 //    return firstChars.joinToString("") == secondChars.joinToString("")
+}
+
+fun isPrime(number: Int): Boolean {
+    if (number <= 3) return number > 1
+    if (number % 2 == 0 || number % 3 == 0) return false
+    var i = 5
+    while (i * i <= number) {
+        if (number % i == 0 || number % (i + 2) == 0) return false
+        i += 6
+    }
+    return true
 }
