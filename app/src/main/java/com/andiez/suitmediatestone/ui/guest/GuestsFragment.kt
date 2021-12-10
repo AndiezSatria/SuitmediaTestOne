@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -54,7 +53,12 @@ class GuestsFragment : Fragment() {
             }
 
         })
-        viewModel.getGuests().observe(viewLifecycleOwner, guestObserver)
+        viewModel.getGuests().observe(viewLifecycleOwner) { guestList ->
+            if (guestList != null) {
+                adapter.setListNotes(guestList)
+                binding.tvEmpty.visibility = if (guestList.isEmpty()) View.VISIBLE else View.GONE
+            }
+        }
         with(binding) {
             viewModel = this@GuestsFragment.viewModel
             toolbar.setupWithNavController(navHostFragment, appBarConfiguration)
@@ -63,11 +67,5 @@ class GuestsFragment : Fragment() {
         }
 
         return binding.root
-    }
-
-    private val guestObserver = Observer<List<GuestEntity>> { guestList ->
-        if (guestList != null) {
-            adapter.setListNotes(guestList)
-        }
     }
 }

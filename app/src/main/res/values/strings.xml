@@ -6,4 +6,6 @@
     <string name="text_next">Next</string>
     <string name="text_image_profile">Image Profile</string>
     <string name="text_image_event">Image Event</string>
+    <string name="text_empty">Data Kosong</string>
+    <string name="text_error">Terjadi kesalahan</string>
 </resources>

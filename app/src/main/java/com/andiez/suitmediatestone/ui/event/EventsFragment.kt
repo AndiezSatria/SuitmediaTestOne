@@ -36,6 +36,7 @@ class EventsFragment : Fragment() {
         })
         adapter.setListNotes(viewModel.events)
         with(binding) {
+            tvEmpty.visibility = if (viewModel.events.isEmpty()) View.VISIBLE else View.GONE
             toolbar.setupWithNavController(navHostFragment, appBarConfiguration)
             rvEvent.setHasFixedSize(true)
             rvEvent.adapter = adapter
