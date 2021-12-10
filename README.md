@@ -27,4 +27,4 @@ I use data dummy, data binding, and recyclerview to present the events data. Als
 ## Guests Page
 I use retrofit, moshi, and kotlin coroutine to get the data from api given. Also I use handler from interface to handle item on click. When one of the item clicked, check the day of birthdate using modulus then show Toast, set the selected guest inside shared viewmodel then backstack the page.
 
-![Guests Page](https://i.ibb.co/2gvPJ0r/Guests-Page.png) ![After Choosing Event](https://i.ibb.co/w0hmTpL/Choose-Button-after-Choosing-Guest.png)
+![Guests Page](https://i.ibb.co/C89JK0J/Guests-Page.png) ![After Choosing Event](https://i.ibb.co/w0hmTpL/Choose-Button-after-Choosing-Guest.png)
