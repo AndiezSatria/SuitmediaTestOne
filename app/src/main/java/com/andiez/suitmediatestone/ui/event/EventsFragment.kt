@@ -26,7 +26,6 @@ class EventsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEventsBinding.inflate(inflater)
-
         val navHostFragment = NavHostFragment.findNavController(this)
         val appBarConfiguration = AppBarConfiguration(navHostFragment.graph)
         adapter = EventsAdapter(object : EventsAdapter.EventItemHandler {
