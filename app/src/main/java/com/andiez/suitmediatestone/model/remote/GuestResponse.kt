@@ -14,7 +14,7 @@ fun List<GuestResponse>.asDomainModel(): List<GuestEntity> {
             it.id,
             it.name,
             it.birthdate,
-            "https://media-cdn.tripadvisor.com/media/photo-s/09/5a/84/aa/amazon-forest-day-tours.jpg",
+            "https://media-cdn.tripadvisor.com/media/photo-i/1a/9e/40/c0/alas-purwo-is-one-of.jpg",
         )
     }
 }
