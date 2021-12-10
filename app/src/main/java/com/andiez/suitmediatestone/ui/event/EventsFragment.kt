@@ -14,11 +14,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.andiez.suitmediatestone.databinding.FragmentEventsBinding
 import com.andiez.suitmediatestone.model.local.EventEntity
 import com.andiez.suitmediatestone.ui.SharedMainViewModel
+import com.andiez.suitmediatestone.viewmodel.ViewModelFactory
 
 class EventsFragment : Fragment() {
 
     private lateinit var binding: FragmentEventsBinding
-    private val viewModel: SharedMainViewModel by activityViewModels()
+    private val viewModel: SharedMainViewModel by activityViewModels {
+        ViewModelFactory.getInstance(requireActivity().application)
+    }
     private lateinit var adapter: EventsAdapter
 
     override fun onCreateView(

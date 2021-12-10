@@ -1,7 +1,6 @@
 package com.andiez.suitmediatestone.ui.guest
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,13 +15,16 @@ import com.andiez.suitmediatestone.databinding.FragmentGuestsBinding
 import com.andiez.suitmediatestone.model.local.GuestEntity
 import com.andiez.suitmediatestone.ui.SharedMainViewModel
 import com.andiez.suitmediatestone.utils.isPrime
+import com.andiez.suitmediatestone.viewmodel.ViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.*
 
 class GuestsFragment : Fragment() {
 
     private lateinit var binding: FragmentGuestsBinding
-    private val viewModel: SharedMainViewModel by activityViewModels()
+    private val viewModel: SharedMainViewModel by activityViewModels {
+        ViewModelFactory.getInstance(requireActivity().application)
+    }
     private lateinit var adapter: GuestAdapter
 
     override fun onCreateView(
@@ -30,7 +32,7 @@ class GuestsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentGuestsBinding.inflate(inflater)
-        binding.lifecycleOwner = viewLifecycleOwner
+        viewModel.fetchGuests()
         val navHostFragment = NavHostFragment.findNavController(this)
         val appBarConfiguration = AppBarConfiguration(navHostFragment.graph)
         adapter = GuestAdapter(object : GuestAdapter.GuestItemHandler {
@@ -73,6 +75,10 @@ class GuestsFragment : Fragment() {
             toolbar.setupWithNavController(navHostFragment, appBarConfiguration)
             rvGuest.setHasFixedSize(true)
             rvGuest.adapter = adapter
+            refreshLayout.setOnRefreshListener {
+                this@GuestsFragment.viewModel.fetchGuests()
+                refreshLayout.isRefreshing = false
+            }
         }
 
         return binding.root

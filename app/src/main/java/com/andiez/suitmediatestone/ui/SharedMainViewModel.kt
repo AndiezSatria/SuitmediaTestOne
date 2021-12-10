@@ -1,5 +1,6 @@
 package com.andiez.suitmediatestone.ui
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +12,10 @@ import com.andiez.suitmediatestone.utils.DataDummy
 import kotlinx.coroutines.*
 import java.lang.Exception
 
-class SharedMainViewModel(private val repository: TestRepository = TestRepository()) : ViewModel() {
+class SharedMainViewModel(
+    private val application: Application,
+    private val repository: TestRepository = TestRepository(application = application)
+) : ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -35,20 +39,20 @@ class SharedMainViewModel(private val repository: TestRepository = TestRepositor
 
     val events: List<EventEntity> = DataDummy.getEventsDummy()
 
-    fun getGuests(): LiveData<List<GuestEntity>> {
-        val guests = MutableLiveData<List<GuestEntity>>()
+    fun fetchGuests() {
         coroutineScope.launch {
-            setState(GuestApiStatus.LOADING)
+        setState(GuestApiStatus.LOADING)
             try {
-                guests.postValue(repository.getGuests().value)
+                repository.fetchGuests()
                 setState(GuestApiStatus.DONE)
             } catch (e: Exception) {
                 e.printStackTrace()
                 setState(GuestApiStatus.ERROR)
             }
         }
-        return guests
     }
+
+    fun getGuests(): LiveData<List<GuestEntity>> = repository.getGuests()
 
     fun clear() {
         _selectedEvent.value = null

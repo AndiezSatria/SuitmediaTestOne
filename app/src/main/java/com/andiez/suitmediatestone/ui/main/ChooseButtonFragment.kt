@@ -9,11 +9,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.andiez.suitmediatestone.databinding.FragmentChooseButtonBinding
 import com.andiez.suitmediatestone.ui.SharedMainViewModel
+import com.andiez.suitmediatestone.viewmodel.ViewModelFactory
 
 class ChooseButtonFragment : Fragment() {
 
     private lateinit var binding: FragmentChooseButtonBinding
-    private val viewModel: SharedMainViewModel by activityViewModels()
+    private val viewModel: SharedMainViewModel by activityViewModels {
+        ViewModelFactory.getInstance(requireActivity().application)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
