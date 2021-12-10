@@ -1,4 +1,4 @@
-# SuitmediaTestOne
+# SuitmediaTestTwo
 This is the result of Suitmedia Screening Test using on Android platform Kotlin. This is the architecture and library that I use :
 - Data Binding
 - Navigation Component and Navigation Safe Args
