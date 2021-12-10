@@ -8,6 +8,8 @@ This is the result of Suitmedia Screening Test using on Android platform Kotlin.
 - Moshi
 - Kotlin Coroutine
 - Glide
+- Room
+- Google Maps
 
 ## Home Page
 On home page, I'm using ```TextInputLayout``` for the text field and simple button for next button. Text field can't be empty and the code check it when next button clicked. I use Navigation Safe Args to send the input to the Choose Button Page
