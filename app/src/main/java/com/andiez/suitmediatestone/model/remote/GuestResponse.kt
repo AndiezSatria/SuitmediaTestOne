@@ -1,0 +1,20 @@
+package com.andiez.suitmediatestone.model.remote
+
+import com.andiez.suitmediatestone.model.local.GuestEntity
+import com.squareup.moshi.Json
+
+data class GuestResponse(
+    @field:Json(name = "id") var id: Int,
+    @field:Json(name = "name") var name: String,
+    @field:Json(name = "birthdate") var birthdate: String,
+)
+fun List<GuestResponse>.asDomainModel(): List<GuestEntity> {
+    return this.map {
+        GuestEntity(
+            it.id,
+            it.name,
+            it.birthdate,
+            "https://media-cdn.tripadvisor.com/media/photo-s/09/5a/84/aa/amazon-forest-day-tours.jpg",
+        )
+    }
+}
