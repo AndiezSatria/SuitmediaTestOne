@@ -12,5 +12,7 @@
     <string name="text_welcome">Selamat Datang!</string>
     <string name="text_splash">Sertakan gambar profil Anda untuk melengkapi profil.</string>
     <string name="text_add">Add</string>
+    <string name="is_palindrome">Is Palindrome</string>
+    <string name="not_palindrome">Not Palindrome</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tempor pulvinar suscipit. Morbi a blandit ante. Sed in elit varius odio sodales maximus non quis eros. Sed urna nibh, consectetur vel neque congue, pharetra gravida augue. Proin a pretium ipsum. Proin pharetra efficitur tempus. Ut dignissim porta vestibulum. Sed eu pretium augue. Praesent volutpat enim sit amet quam auctor, nec efficitur massa congue. Pellentesque semper interdum ultricies. Aenean enim urna, cursus a urna eget, vestibulum varius lorem. Aliquam sit amet neque interdum ante consequat eleifend. Sed ut quam eros. Vestibulum ultrices semper tellus vitae hendrerit. Curabitur dapibus ligula odio, nec venenatis mauris pharetra a.</string>
 </resources>
