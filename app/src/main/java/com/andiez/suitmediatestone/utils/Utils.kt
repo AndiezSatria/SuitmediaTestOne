@@ -8,7 +8,7 @@ import kotlin.math.roundToInt
 
 fun convertOldFormatDate(oldDate: String): String {
     val oldFormat = "dd-MM-yyyy"
-    val newFormat = "d MMMM, yyyy"
+    val newFormat = "MMM dd, yyyy"
     val sdf = SimpleDateFormat(oldFormat, Locale.getDefault())
     val date = sdf.parse(oldDate)
     sdf.applyPattern(newFormat)

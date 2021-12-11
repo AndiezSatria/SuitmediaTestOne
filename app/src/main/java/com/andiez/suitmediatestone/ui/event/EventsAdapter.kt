@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andiez.suitmediatestone.databinding.LayoutListEventBinding
 import com.andiez.suitmediatestone.helper.EventDiffCallback
@@ -40,8 +41,13 @@ class EventsAdapter internal constructor(
     inner class EventViewHolder(private val binding: LayoutListEventBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: EventEntity) {
+            val adapter = TagAdapter()
             binding.item = item
             binding.root.setOnClickListener { handler.onItemClick(bindingAdapterPosition, item) }
+            binding.rvTags.layoutManager =
+                LinearLayoutManager(binding.rvTags.context, LinearLayoutManager.HORIZONTAL, false)
+            adapter.submitList(item.tags)
+            binding.rvTags.adapter = adapter
         }
     }
 
