@@ -1,56 +1,62 @@
 package com.andiez.suitmediatestone.ui.event
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.DividerItemDecoration
+import com.andiez.suitmediatestone.R
 import com.andiez.suitmediatestone.databinding.FragmentEventsBinding
-import com.andiez.suitmediatestone.model.local.EventEntity
-import com.andiez.suitmediatestone.ui.SharedMainViewModel
-import com.andiez.suitmediatestone.viewmodel.ViewModelFactory
 
 class EventsFragment : Fragment() {
 
     private lateinit var binding: FragmentEventsBinding
-    private val viewModel: SharedMainViewModel by activityViewModels {
-        ViewModelFactory.getInstance(requireActivity().application)
-    }
-    private lateinit var adapter: EventsAdapter
+    private var fragmentPosition = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEventsBinding.inflate(inflater)
+        setFragment()
         val navHostFragment = NavHostFragment.findNavController(this)
         val appBarConfiguration = AppBarConfiguration(navHostFragment.graph)
-        adapter = EventsAdapter(object : EventsAdapter.EventItemHandler {
-            override fun onItemClick(position: Int, item: EventEntity) {
-                viewModel.setSelectedEvent(item)
-                this@EventsFragment.findNavController().popBackStack()
-            }
-        })
-        adapter.setListNotes(viewModel.events)
         with(binding) {
-            tvEmpty.visibility = if (viewModel.events.isEmpty()) View.VISIBLE else View.GONE
             toolbar.setupWithNavController(navHostFragment, appBarConfiguration)
-            rvEvent.setHasFixedSize(true)
-            rvEvent.adapter = adapter
-            rvEvent.addItemDecoration(
-                DividerItemDecoration(
-                    rvEvent.context,
-                    DividerItemDecoration.VERTICAL
-                )
+            toolbar.inflateMenu(R.menu.menu_event)
+            btnAdd.setOnClickListener { setFragment() }
+            val backIcon =
+                AppCompatResources.getDrawable(requireContext(), R.drawable.btn_back_article_normal)
+            backIcon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.purple_500
+                ), BlendModeCompat.SRC_ATOP
             )
+            toolbar.navigationIcon = backIcon
         }
         return binding.root
     }
 
+    private fun setFragment() {
+        val fragment = when (fragmentPosition) {
+            1 -> {
+                fragmentPosition = 2
+                ListEventFragment.getInstance()
+            }
+            else -> {
+                fragmentPosition = 1
+                EventMapFragment.newInstance()
+            }
+        }
+        val manager = parentFragmentManager
+        val transaction = manager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
+    }
 }
