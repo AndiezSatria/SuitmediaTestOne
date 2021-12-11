@@ -7,6 +7,6 @@ data class EventEntity(
     var description: String = "",
     var date: String = "",
     var tags: ArrayList<String> = ArrayList(),
-    var lat: Long = 0,
-    var lon: Long = 0,
+    var lat: Double = 0.0,
+    var lon: Double = 0.0,
 )
