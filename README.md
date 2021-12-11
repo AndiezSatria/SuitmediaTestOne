@@ -10,6 +10,7 @@ This is the result of Suitmedia Screening Test Phase two using on Android platfo
 - Glide
 - Room
 - Google Maps
+
 All features on phase one are still maintained in this application. Some are modified to fulfill the question.
 
 ## Question 1
