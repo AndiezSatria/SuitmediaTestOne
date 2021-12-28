@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.andiez.suitmediatestone.model.local.EventEntity
 import com.andiez.suitmediatestone.model.local.GuestEntity
-import com.andiez.suitmediatestone.source.GuestApiStatus
 import com.andiez.suitmediatestone.source.TestRepository
+import com.andiez.suitmediatestone.source.remote.GuestApiStatus
 import com.andiez.suitmediatestone.utils.DataDummy
 import kotlinx.coroutines.*
 import java.lang.Exception
