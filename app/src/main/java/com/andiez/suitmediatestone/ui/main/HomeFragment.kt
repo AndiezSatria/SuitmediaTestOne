@@ -1,23 +1,13 @@
 package com.andiez.suitmediatestone.ui.main
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleRegistry
-import androidx.navigation.fragment.findNavController
-import com.andiez.suitmediatestone.R
 import com.andiez.suitmediatestone.databinding.FragmentHomeBinding
 import com.andiez.suitmediatestone.di.Injection
-import com.andiez.suitmediatestone.ui.base.BaseFragment
-import com.andiez.suitmediatestone.utils.isPalindrome
-import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment : Fragment() {
 
