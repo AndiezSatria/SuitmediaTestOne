@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'realm-android'
 }
 
 android {
@@ -56,11 +57,13 @@ dependencies {
     // Network
     def version_retrofit = "2.9.0"
     def version_moshi = '1.12.0'
+    def logging_interceptor_version = '5.0.0-alpha.3'
     implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
     implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
     implementation "com.squareup.moshi:moshi:$version_moshi"
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
 
     // Coroutines
     def version_kotlin_coroutines = "1.5.0"
@@ -82,4 +85,11 @@ dependencies {
     // google maps
     implementation 'com.google.android.gms:play-services-maps:18.0.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+    // Realm
+    def realm_version = "10.9.0"
+    api "io.realm:realm-annotations:$realm_version"
+    api "io.realm:realm-android-library:$realm_version"
+    api "io.realm:realm-android-kotlin-extensions:$realm_version"
+    kapt "io.realm:realm-annotations-processor:$realm_version"
 }
