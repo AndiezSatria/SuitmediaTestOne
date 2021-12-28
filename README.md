@@ -5,3 +5,4 @@ This is the result of Suitmedia Screening Test Phase two updated into these spes
 - Firebase Analytical
 - Firebase Push Notification using One Signal
 - Firebase Remote Config
+- Realm DB for Caching
