@@ -9,13 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.andiez.suitmediatestone.databinding.FragmentEventMapBinding
 import com.andiez.suitmediatestone.di.Injection
-import com.andiez.suitmediatestone.helper.EventChooseListener
+import com.andiez.suitmediatestone.helper.EventSelectListener
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 
-class EventMapFragment private constructor(private val listener: EventChooseListener) : Fragment(),
+class EventMapFragment private constructor(private val listener: EventSelectListener) : Fragment(),
     OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private lateinit var binding: FragmentEventMapBinding
@@ -78,7 +78,7 @@ class EventMapFragment private constructor(private val listener: EventChooseList
 
     companion object {
         const val REQUEST_LOCATION_PERMISSION = 1
-        fun newInstance(listener: EventChooseListener) = EventMapFragment(listener)
+        fun newInstance(listener: EventSelectListener) = EventMapFragment(listener)
     }
 
 }

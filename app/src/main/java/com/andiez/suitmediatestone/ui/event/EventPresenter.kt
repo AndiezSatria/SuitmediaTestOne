@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andiez.suitmediatestone.R
-import com.andiez.suitmediatestone.helper.EventChooseListener
+import com.andiez.suitmediatestone.helper.EventSelectListener
 import com.andiez.suitmediatestone.model.local.EventEntity
 import com.andiez.suitmediatestone.ui.base.BasePresenter
 import com.andiez.suitmediatestone.utils.DataDummy
@@ -21,7 +21,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class EventPresenter private constructor(private var listener: EventChooseListener) :
+class EventPresenter private constructor(private var listener: EventSelectListener) :
     BasePresenter() {
     private var fragmentPosition = 1
     val events: List<EventEntity> = DataDummy.getEventsDummy()
@@ -124,7 +124,7 @@ class EventPresenter private constructor(private var listener: EventChooseListen
         @Volatile
         private var instance: EventPresenter? = null
 
-        fun getInstance(listener: EventChooseListener): EventPresenter =
+        fun getInstance(listener: EventSelectListener): EventPresenter =
             instance ?: synchronized(this) {
                 instance ?: EventPresenter(listener)
             }

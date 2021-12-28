@@ -35,10 +35,14 @@
         tools:layout="@layout/fragment_events" >
         <argument
             android:name="listener"
-            app:argType="com.andiez.suitmediatestone.helper.EventChooseListener" />
+            app:argType="com.andiez.suitmediatestone.helper.EventSelectListener" />
     </fragment>
     <fragment
         android:id="@+id/guestsFragment"
         android:name="com.andiez.suitmediatestone.ui.guest.GuestsFragment"
-        tools:layout="@layout/fragment_guests" />
+        tools:layout="@layout/fragment_guests" >
+        <argument
+            android:name="listener"
+            app:argType="com.andiez.suitmediatestone.helper.GuestSelectListener" />
+    </fragment>
 </navigation>

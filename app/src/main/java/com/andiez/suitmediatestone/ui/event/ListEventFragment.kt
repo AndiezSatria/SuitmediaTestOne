@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.andiez.suitmediatestone.databinding.FragmentListEventBinding
 import com.andiez.suitmediatestone.di.Injection
-import com.andiez.suitmediatestone.helper.EventChooseListener
+import com.andiez.suitmediatestone.helper.EventSelectListener
 
-class ListEventFragment private constructor(private val listener: EventChooseListener) :
+class ListEventFragment private constructor(private val listener: EventSelectListener) :
     Fragment() {
 
     private lateinit var binding: FragmentListEventBinding
@@ -35,7 +35,7 @@ class ListEventFragment private constructor(private val listener: EventChooseLis
     }
 
     companion object {
-        fun getInstance(listener: EventChooseListener): ListEventFragment =
+        fun getInstance(listener: EventSelectListener): ListEventFragment =
             ListEventFragment(listener)
     }
 }

@@ -3,7 +3,8 @@ package com.andiez.suitmediatestone.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
-import com.andiez.suitmediatestone.helper.EventChooseListener
+import com.andiez.suitmediatestone.helper.EventSelectListener
+import com.andiez.suitmediatestone.helper.GuestSelectListener
 import com.andiez.suitmediatestone.model.local.EventEntity
 import com.andiez.suitmediatestone.model.local.GuestEntity
 import com.andiez.suitmediatestone.ui.base.BasePresenter
@@ -20,9 +21,15 @@ class ChooseButtonPresenter private constructor() : BasePresenter() {
         _selectedEvent.value = event
     }
 
-    private val listener = object : EventChooseListener {
+    private val eventListener = object : EventSelectListener {
         override fun onEventSelected(event: EventEntity) {
             setSelectedEvent(event)
+        }
+    }
+
+    private val guestListener = object : GuestSelectListener {
+        override fun onGuestSelect(selectedGuest: GuestEntity) {
+            setSelectedGuest(selectedGuest)
         }
     }
 
@@ -36,14 +43,18 @@ class ChooseButtonPresenter private constructor() : BasePresenter() {
         fragment.findNavController()
             .navigate(
                 ChooseButtonFragmentDirections.actionChooseButtonFragmentToEventsFragment(
-                    listener
+                    eventListener
                 )
             )
     }
 
     fun goToGuestPage(fragment: ChooseButtonFragment) {
         fragment.findNavController()
-            .navigate(ChooseButtonFragmentDirections.actionChooseButtonFragmentToGuestsFragment())
+            .navigate(
+                ChooseButtonFragmentDirections.actionChooseButtonFragmentToGuestsFragment(
+                    guestListener
+                )
+            )
     }
 
     companion object {

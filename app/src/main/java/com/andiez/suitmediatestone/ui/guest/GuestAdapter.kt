@@ -12,7 +12,8 @@ class GuestAdapter internal constructor(
     private val itemHandler: GuestItemHandler
 ) : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>() {
     private val listGuest = ArrayList<GuestEntity>()
-    fun setListNotes(listGuest: List<GuestEntity>) {
+    fun setListNotes(listGuest: List<GuestEntity>?) {
+        if (listGuest == null) return
         val diffCallback = GuestDiffCallback(this.listGuest, listGuest)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         this.listGuest.clear()

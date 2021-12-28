@@ -6,14 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.andiez.suitmediatestone.databinding.FragmentChooseButtonBinding
 import com.andiez.suitmediatestone.di.Injection
-import com.andiez.suitmediatestone.helper.EventChooseListener
-import com.andiez.suitmediatestone.model.local.EventEntity
-import com.andiez.suitmediatestone.ui.SharedMainViewModel
-import com.andiez.suitmediatestone.viewmodel.ViewModelFactory
 
 class ChooseButtonFragment : Fragment() {
 
@@ -37,9 +32,7 @@ class ChooseButtonFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             presenter = this@ChooseButtonFragment.presenter
             btnGuest.setOnClickListener {
-                this@ChooseButtonFragment.findNavController().navigate(
-                    ChooseButtonFragmentDirections.actionChooseButtonFragmentToGuestsFragment()
-                )
+                this@ChooseButtonFragment.presenter.goToGuestPage(this@ChooseButtonFragment)
             }
             btnEvent.setOnClickListener {
                 this@ChooseButtonFragment.presenter.goToEventPage(this@ChooseButtonFragment)

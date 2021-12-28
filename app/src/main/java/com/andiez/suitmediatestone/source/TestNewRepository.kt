@@ -23,7 +23,8 @@ class TestNewRepository private constructor(
             }
 
             override fun shouldFetch(data: List<GuestEntity>?): Boolean =
-                data == null || data.isEmpty()
+//                data == null || data.isEmpty()
+                true
 
             override suspend fun createCall(): Flow<ApiResponse<List<GuestResponse>>> =
                 remoteDataSource.getAllGuest()
