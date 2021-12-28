@@ -10,7 +10,7 @@
             name="viewModel"
             type="com.andiez.suitmediatestone.ui.SharedMainViewModel" />
 
-        <import type="com.andiez.suitmediatestone.source.GuestApiStatus" />
+        <import type="com.andiez.suitmediatestone.source.remote.GuestApiStatus" />
 
         <import type="android.view.View" />
     </data>

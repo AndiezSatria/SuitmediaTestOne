@@ -9,6 +9,8 @@ import com.andiez.suitmediatestone.model.local.asDomainModel
 import com.andiez.suitmediatestone.model.remote.asDatabaseModel
 import com.andiez.suitmediatestone.source.db.GuestDao
 import com.andiez.suitmediatestone.source.db.GuestDatabase
+import com.andiez.suitmediatestone.source.remote.GuestService
+import com.andiez.suitmediatestone.source.remote.Network
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
