@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.andiez.suitmediatestone.ui.SharedMainViewModel" />
+            name="presenter"
+            type="com.andiez.suitmediatestone.ui.main.ChooseButtonPresenter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,6 +34,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:textAlignment="textEnd"
+            android:text="@{presenter.chosenName}"
             app:layout_constraintBottom_toTopOf="@+id/btn_event"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_text_name"
@@ -47,7 +48,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:text='@{viewModel.selectedEvent.name ?? "Pilih Event"}'
+            android:text='@{presenter.selectedEvent.name ?? "Pilih Event"}'
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +61,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text='@{viewModel.selectedGuest.name ?? "Pilih Guest"}'
+            android:text='@{presenter.selectedGuest.name ?? "Pilih Guest"}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_event" />
