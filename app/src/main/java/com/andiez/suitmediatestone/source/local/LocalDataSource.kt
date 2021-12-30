@@ -5,7 +5,7 @@ import com.andiez.suitmediatestone.source.local.realm.IDatabaseHelper
 import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource private constructor(private val databaseHelper: IDatabaseHelper) {
-    suspend fun getAllGuest(): Flow<List<GuestRealm>> = databaseHelper.getGuests()
+    fun getAllGuest(): Flow<List<GuestRealm>> = databaseHelper.getGuests()
     suspend fun insertGuests(guests: List<GuestRealm>) = databaseHelper.insertGuests(guests)
 
     companion object {

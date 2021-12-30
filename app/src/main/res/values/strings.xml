@@ -8,7 +8,10 @@
     <string name="text_empty">Data Kosong</string>
     <string name="text_error">Terjadi kesalahan</string>
     <string name="text_done">Selesai</string>
+    <string name="text_login">Login</string>
+    <string name="text_logout">Sign Out</string>
     <string name="text_welcome">Selamat Datang!</string>
+    <string name="text_welcome_user">Selamat Datang, %1$s!</string>
     <string name="text_splash">Sertakan gambar profil Anda untuk melengkapi profil.</string>
     <string name="text_add">Add</string>
     <string name="is_palindrome">Is Palindrome</string>

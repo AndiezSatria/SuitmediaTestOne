@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id 'realm-android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -94,4 +95,10 @@ dependencies {
     api "io.realm:realm-android-library:$realm_version"
     api "io.realm:realm-android-kotlin-extensions:$realm_version"
     kapt "io.realm:realm-annotations-processor:$realm_version"
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:29.0.3')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
 }

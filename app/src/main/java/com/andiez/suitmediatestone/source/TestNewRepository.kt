@@ -18,7 +18,7 @@ class TestNewRepository private constructor(
 ) : ITestRepository {
     override fun getAllGuest(): Flow<Resource<List<GuestEntity>>> =
         object : NetworkBoundResource<List<GuestEntity>, List<GuestResponse>>() {
-            override suspend fun loadFromDB(): Flow<List<GuestEntity>> {
+            override fun loadFromDB(): Flow<List<GuestEntity>> {
                 return localDataSource.getAllGuest().map { DataMapper.mapRealmsToDomain(it) }
             }
 
