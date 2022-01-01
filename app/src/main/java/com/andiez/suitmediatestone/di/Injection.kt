@@ -15,6 +15,7 @@ import com.andiez.suitmediatestone.ui.guest.GuestPresenter
 import com.andiez.suitmediatestone.ui.main.ChooseButtonPresenter
 import com.andiez.suitmediatestone.ui.main.HomePresenter
 import com.andiez.suitmediatestone.utils.AppExecutors
+import com.onesignal.OneSignal
 import io.realm.RealmConfiguration
 
 object Injection {
@@ -28,8 +29,14 @@ object Injection {
         val remoteDataSource = RemoteDataSource.getInstance(Network.guestsService)
         val localDataSource = LocalDataSource.getInstance(DatabaseHelper.getInstance())
         val appExecutors = AppExecutors()
+        val oneSignalDevice = OneSignal.getDeviceState()
 
-        return TestNewRepository.getInstance(remoteDataSource, localDataSource, appExecutors)
+        return TestNewRepository.getInstance(
+            remoteDataSource,
+            localDataSource,
+            appExecutors,
+            oneSignalDevice
+        )
     }
 
     fun provideUseCase(): TestUseCase {
@@ -39,7 +46,10 @@ object Injection {
 
     fun provideHomePresenter(): HomePresenter = HomePresenter.getInstance()
 
-    fun provideChooseButtonPresenter(): ChooseButtonPresenter = ChooseButtonPresenter.getInstance()
+    fun provideChooseButtonPresenter(): ChooseButtonPresenter = ChooseButtonPresenter.getInstance(
+        provideUseCase()
+    )
+
     fun provideEventPresenter(listener: EventSelectListener): EventPresenter =
         EventPresenter.getInstance(listener)
 

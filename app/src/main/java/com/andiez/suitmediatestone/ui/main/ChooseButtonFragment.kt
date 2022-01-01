@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.andiez.suitmediatestone.databinding.FragmentChooseButtonBinding
 import com.andiez.suitmediatestone.di.Injection
+import com.andiez.suitmediatestone.source.Resource
 
 class ChooseButtonFragment : Fragment() {
 
@@ -36,6 +37,16 @@ class ChooseButtonFragment : Fragment() {
             }
             btnEvent.setOnClickListener {
                 this@ChooseButtonFragment.presenter.goToEventPage(this@ChooseButtonFragment)
+            }
+            btnSendNotification.setOnClickListener {
+                this@ChooseButtonFragment.presenter.sendNotification()
+                    .observe(viewLifecycleOwner) { resource ->
+                        when (resource) {
+                            is Resource.Error -> {}
+                            is Resource.Loading -> {}
+                            is Resource.Success -> {}
+                        }
+                    }
             }
         }
 
