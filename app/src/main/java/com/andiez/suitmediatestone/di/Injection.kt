@@ -16,6 +16,7 @@ import com.andiez.suitmediatestone.ui.guest.GuestPresenter
 import com.andiez.suitmediatestone.ui.main.ChooseButtonPresenter
 import com.andiez.suitmediatestone.ui.main.HomePresenter
 import com.andiez.suitmediatestone.utils.AppExecutors
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
@@ -56,8 +57,10 @@ object Injection {
         provideFirebaseRemoteConfig()
     )
 
-    fun provideEventPresenter(listener: EventSelectListener): EventPresenter =
-        EventPresenter.getInstance(listener)
+    fun provideEventPresenter(listener: EventSelectListener): EventPresenter {
+        val analytics = Firebase.analytics
+        return EventPresenter.getInstance(listener, analytics)
+    }
 
     fun provideGuestPresenter(listener: GuestSelectListener): GuestPresenter =
         GuestPresenter.getInstance(

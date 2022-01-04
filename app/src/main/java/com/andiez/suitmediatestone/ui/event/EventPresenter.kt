@@ -3,6 +3,7 @@ package com.andiez.suitmediatestone.ui.event
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -20,8 +21,12 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.analytics.FirebaseAnalytics
 
-class EventPresenter private constructor(private var listener: EventSelectListener) :
+class EventPresenter private constructor(
+    private var listener: EventSelectListener,
+    private val analytics: FirebaseAnalytics
+) :
     BasePresenter() {
     private var fragmentPosition = 1
     val events: List<EventEntity> = DataDummy.getEventsDummy()
@@ -40,6 +45,11 @@ class EventPresenter private constructor(private var listener: EventSelectListen
         val listAdapter = EventsAdapter(object : EventsAdapter.EventItemHandler {
             override fun onItemClick(position: Int, item: EventEntity) {
                 listener.onEventSelected(item)
+                analytics.setUserProperty("selected_event", item.name)
+                val event = Bundle()
+                event.putString("event", item.name)
+                event.putDouble("latitude", item.lat)
+                event.putDouble("longitude", item.lon)
                 parentFragment.findNavController().popBackStack()
             }
         })
@@ -57,6 +67,11 @@ class EventPresenter private constructor(private var listener: EventSelectListen
         val adapter = EventGripAdapter(object : EventGripAdapter.GridHandler {
             override fun onItemClick(position: Int, item: EventEntity) {
                 listener.onEventSelected(item)
+                analytics.setUserProperty("selected_event", item.name)
+                val event = Bundle()
+                event.putString("event", item.name)
+                event.putDouble("latitude", item.lat)
+                event.putDouble("longitude", item.lon)
                 parentFragment.findNavController().popBackStack()
             }
         })
@@ -124,9 +139,12 @@ class EventPresenter private constructor(private var listener: EventSelectListen
         @Volatile
         private var instance: EventPresenter? = null
 
-        fun getInstance(listener: EventSelectListener): EventPresenter =
+        fun getInstance(
+            listener: EventSelectListener,
+            firebaseAnalytics: FirebaseAnalytics
+        ): EventPresenter =
             instance ?: synchronized(this) {
-                instance ?: EventPresenter(listener)
+                instance ?: EventPresenter(listener, firebaseAnalytics)
             }
     }
 }
