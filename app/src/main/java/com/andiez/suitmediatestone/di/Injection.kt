@@ -1,5 +1,6 @@
 package com.andiez.suitmediatestone.di
 
+import com.andiez.suitmediatestone.R
 import com.andiez.suitmediatestone.domain.repository.ITestRepository
 import com.andiez.suitmediatestone.domain.usecase.TestInteractor
 import com.andiez.suitmediatestone.domain.usecase.TestUseCase
@@ -15,6 +16,10 @@ import com.andiez.suitmediatestone.ui.guest.GuestPresenter
 import com.andiez.suitmediatestone.ui.main.ChooseButtonPresenter
 import com.andiez.suitmediatestone.ui.main.HomePresenter
 import com.andiez.suitmediatestone.utils.AppExecutors
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.onesignal.OneSignal
 import io.realm.RealmConfiguration
 
@@ -47,7 +52,8 @@ object Injection {
     fun provideHomePresenter(): HomePresenter = HomePresenter.getInstance()
 
     fun provideChooseButtonPresenter(): ChooseButtonPresenter = ChooseButtonPresenter.getInstance(
-        provideUseCase()
+        provideUseCase(),
+        provideFirebaseRemoteConfig()
     )
 
     fun provideEventPresenter(listener: EventSelectListener): EventPresenter =
@@ -57,4 +63,12 @@ object Injection {
         GuestPresenter.getInstance(
             provideUseCase(), listener
         )
+
+    fun provideFirebaseRemoteConfig(): FirebaseRemoteConfig {
+        val remoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings { minimumFetchIntervalInSeconds = 3600 }
+        remoteConfig.setConfigSettingsAsync(configSettings)
+        remoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
+        return remoteConfig
+    }
 }

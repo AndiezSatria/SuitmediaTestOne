@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>greet</key>
+        <value>Hello from Default Value</value>
+    </entry>
+    <entry>
+        <key>greet_caps</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>loading_phrase</key>
+        <value>Fetching default config...</value>
+    </entry>
+</defaultsMap>

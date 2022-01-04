@@ -1,6 +1,9 @@
 package com.andiez.suitmediatestone.ui.main
 
+import android.util.Log
 import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -14,8 +17,13 @@ import com.andiez.suitmediatestone.model.local.GuestEntity
 import com.andiez.suitmediatestone.source.Resource
 import com.andiez.suitmediatestone.ui.base.BasePresenter
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.get
 
-class ChooseButtonPresenter private constructor(private val useCase: TestUseCase) :
+class ChooseButtonPresenter private constructor(
+    private val useCase: TestUseCase,
+    private val remoteConfig: FirebaseRemoteConfig
+) :
     BasePresenter() {
     var chosenName: String = ""
     fun setName(name: String) {
@@ -71,13 +79,46 @@ class ChooseButtonPresenter private constructor(private val useCase: TestUseCase
             )
     }
 
+    fun fetchWelcome(textView: TextView, view: View) {
+        textView.text = remoteConfig[LOADING_PHRASE_CONFIG_KEY].asString()
+        remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val updated = task.result
+                Log.d("RemoteConfig", "Config params updated: $updated")
+                Snackbar.make(
+                    view, "Fetch and activate succeeded",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            } else {
+                Snackbar.make(
+                    view, "Fetch failed",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+            displayGreetingMessage(textView)
+        }
+    }
+
+    private fun displayGreetingMessage(textView: TextView) {
+        val greetingMessage = remoteConfig[GREET_MESSAGE_KEY].asString()
+        textView.text = greetingMessage
+        textView.isAllCaps = remoteConfig[GREET_MESSAGE_CAPS_KEY].asBoolean()
+    }
+
     companion object {
+        private const val LOADING_PHRASE_CONFIG_KEY = "loading_phrase"
+        private const val GREET_MESSAGE_KEY = "greet"
+        private const val GREET_MESSAGE_CAPS_KEY = "greet_caps"
+
         @Volatile
         private var instance: ChooseButtonPresenter? = null
 
-        fun getInstance(useCase: TestUseCase): ChooseButtonPresenter =
+        fun getInstance(
+            useCase: TestUseCase,
+            remoteConfig: FirebaseRemoteConfig
+        ): ChooseButtonPresenter =
             instance ?: synchronized(this) {
-                instance ?: ChooseButtonPresenter(useCase)
+                instance ?: ChooseButtonPresenter(useCase, remoteConfig)
             }
     }
 }

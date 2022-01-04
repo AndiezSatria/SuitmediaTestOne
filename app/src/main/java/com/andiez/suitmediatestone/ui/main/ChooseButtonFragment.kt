@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.andiez.suitmediatestone.databinding.FragmentChooseButtonBinding
 import com.andiez.suitmediatestone.di.Injection
 import com.andiez.suitmediatestone.source.Resource
@@ -48,6 +47,7 @@ class ChooseButtonFragment : Fragment() {
                         }
                     }
             }
+            btnFetchConfig.setOnClickListener { this@ChooseButtonFragment.presenter.fetchWelcome(tvWelcome, root) }
         }
 
         return binding.root
